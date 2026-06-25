@@ -1,11 +1,11 @@
-import Particles from "react-tsparticles";
-import { loadFull } from "tsparticles";
+import { useCallback } from "react";
+import Particles from "@tsparticles/react";
+import { loadSlim } from "tsparticles-slim";
 
 const ParticleBackground = () => {
-
-  const particlesInit = async (main) => {
-    await loadFull(main);
-  };
+  const particlesInit = useCallback(async (engine) => {
+    await loadSlim(engine);
+  }, []);
 
   return (
     <Particles
@@ -21,9 +21,15 @@ const ParticleBackground = () => {
           color: "#050816",
         },
 
+        fpsLimit: 60,
+
         particles: {
           number: {
             value: 60,
+            density: {
+              enable: true,
+              area: 800,
+            },
           },
 
           color: {
@@ -35,20 +41,27 @@ const ParticleBackground = () => {
           },
 
           size: {
-            value: 3,
+            value: { min: 1, max: 3 },
           },
 
           move: {
             enable: true,
             speed: 1,
+            direction: "none",
+            outModes: {
+              default: "bounce",
+            },
           },
 
           links: {
             enable: true,
             color: "#38bdf8",
             opacity: 0.2,
+            distance: 150,
           },
         },
+
+        detectRetina: true,
       }}
     />
   );

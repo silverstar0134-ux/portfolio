@@ -2,42 +2,28 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 
 // assets
-import fishmartVideo from "../assets/projects/fishmart.mp4";
+import fishmartImage from "../assets/projects/fishmart.png";
 import farmerImage from "../assets/projects/farmerapp.png";
-import sweetkaramVideo from "../assets/projects/sweetkaram.mp4";
+import sweetkaramImage from "../assets/projects/sweetkaram.png";
 
 const projects = [
   {
     title: "Online Fish Mart",
-    desc:
-      "Modern fish ordering ecommerce platform.",
-    image: fishmartVideo,
-    type: "video",
-
-    github:
-      "https://github.com/silverstar0134-ux/Fishmart-project",
+    desc: "Modern fish ordering ecommerce platform.",
+    image: fishmartImage,
+    github: "https://github.com/silverstar0134-ux/Fishmart-project",
   },
-
   {
     title: "Farmer Worker App",
-    desc:
-      "Farmers and workers platform.",
+    desc: "Farmers and workers platform.",
     image: farmerImage,
-    type: "image",
-
-    github:
-      "https://github.com/silverstar0134-ux/farmer-worker-app",
+    github: "https://github.com/silverstar0134-ux/farmer-worker-app",
   },
-
   {
     title: "Sweet & Karam",
-    desc:
-      "Premium sweets ecommerce website.",
-    image: sweetkaramVideo,
-    type: "video",
-
-    github:
-      "https://github.com/silverstar0134-ux/sweet-ecommerce-project",
+    desc: "Premium sweets ecommerce website.",
+    image: sweetkaramImage,
+    github: "https://github.com/silverstar0134-ux/sweet-ecommerce-project",
   },
 ];
 
@@ -54,7 +40,6 @@ const Projects = () => {
 
   return (
     <section id="projects" className="projects-section">
-
       {/* HEADER */}
       <motion.div
         className="project-header"
@@ -81,30 +66,17 @@ const Projects = () => {
             whileHover={{ y: -10 }}
             viewport={{ once: true }}
           >
-            
-            {/* MEDIA (CLICKABLE) */}
+            {/* IMAGE */}
             <div
               className="project-media"
               onClick={() => openMedia(project)}
               style={{ cursor: "pointer" }}
             >
-              {project.type === "video" ? (
-                <video
-                  className="project-video"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                >
-                  <source src={project.image} type="video/mp4" />
-                </video>
-              ) : (
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="project-img"
-                />
-              )}
+              <img
+                src={project.image}
+                alt={project.title}
+                className="project-img"
+              />
             </div>
 
             {/* CONTENT */}
@@ -113,54 +85,31 @@ const Projects = () => {
               <p>{project.desc}</p>
 
               <div className="project-buttons">
-  <a
-    href={project.github}
-    target="_blank"
-    rel="noreferrer"
-  >
-    View Code
-  </a>
-</div>
+                <a href={project.github} target="_blank" rel="noreferrer">
+                  View Code
+                </a>
+              </div>
             </div>
-
           </motion.div>
         ))}
       </div>
 
-      {/* 🔥 FULLSCREEN MODAL */}
+      {/* FULLSCREEN MODAL */}
       {selectedMedia && (
         <div className="modal-overlay" onClick={closeMedia}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-
-            {selectedMedia.type === "video" ? (
-              <video
-                autoPlay
-                muted
-                loop
-                controls
-                className="modal-media"
-              >
-                <source
-                  src={selectedMedia.image}
-                  type="video/mp4"
-                />
-              </video>
-            ) : (
-              <img
-                src={selectedMedia.image}
-                alt={selectedMedia.title}
-                className="modal-media"
-              />
-            )}
+            <img
+              src={selectedMedia.image}
+              alt={selectedMedia.title}
+              className="modal-media"
+            />
 
             <button className="close-btn" onClick={closeMedia}>
               ✕
             </button>
-
           </div>
         </div>
       )}
-
     </section>
   );
 };
